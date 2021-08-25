@@ -13,6 +13,7 @@ public class Dino : MonoBehaviour
     public AudioClip audioMorri;
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class Dino : MonoBehaviour
         audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,7 @@ public class Dino : MonoBehaviour
         tempoPulado -= Time.deltaTime;
 
         VerificarMorte();
+        AtualizarAnimacao();
     }
 
     void Andar(bool paraFrente)
@@ -54,7 +57,7 @@ public class Dino : MonoBehaviour
     }
     void Pular()
     {
-        
+        animator.SetBool("estaPulando", true);
         Vector2 forca = new Vector2(0f, 15f);
         rb.AddForce(forca, ForceMode2D.Impulse);
         tempoPulado = tempoPulo;
@@ -65,7 +68,13 @@ public class Dino : MonoBehaviour
         {
             this.transform.position = posicaoInicial;
             audio.PlayOneShot(audioMorri);
-        }
+        }  
+    }
+
+    public void Reviver()
+    {
+        animator.SetBool("estaMorrendo", false);
+        this.transform.position = posicaoInicial;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -76,8 +85,25 @@ public class Dino : MonoBehaviour
         }
         if (collision.collider.CompareTag("Perigo"))
         {
-            this.transform.position = posicaoInicial;
+            //this.transform.position = posicaoInicial;
             audio.PlayOneShot(audioMorri);
+            animator.SetBool("estaMorrendo", true);
+        }
+        if (collision.collider.CompareTag("Chao"))
+        {
+            animator.SetBool("estaPulando", false);
+        }
+    }
+
+    void AtualizarAnimacao()
+    {
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
+        {
+            animator.SetBool("estaAndando", true);
+        }
+        else
+        {
+            animator.SetBool("estaAndando", false);
         }
     }
 }

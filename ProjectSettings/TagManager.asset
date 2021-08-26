@@ -8,6 +8,7 @@ TagManager:
   - Dino
   - Item
   - Perigo
+  - cogumelo_bom
   layers:
   - Default
   - TransparentFX

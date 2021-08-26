@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Dino : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class Dino : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private Animator animator;
+    private int qtdCogubelos;
+    public GameObject textoQtdCogubelos;
+    private int qtdVidas;
+    public GameObject textoVidas;
+    public GameObject textoGameOver;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,20 +28,30 @@ public class Dino : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        qtdCogubelos = 0;
+        qtdVidas = 3;
+        AtualizarHUD();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //andar para frente ou para trás
-        if (Input.GetKey(KeyCode.D)) Andar(true);
-        if (Input.GetKey(KeyCode.A)) Andar(false);
+        if (qtdVidas > 0)
+        {
+            //andar para frente ou para trás
+            if (Input.GetKey(KeyCode.D)) Andar(true);
+            if (Input.GetKey(KeyCode.A)) Andar(false);
 
-        if (Input.GetKey(KeyCode.W) && tempoPulado <= 0) Pular();
-        tempoPulado -= Time.deltaTime;
+            if (Input.GetKey(KeyCode.W) && tempoPulado <= 0) Pular();
+            tempoPulado -= Time.deltaTime;
 
-        VerificarMorte();
-        AtualizarAnimacao();
+            VerificarMorte();
+            AtualizarAnimacao();
+        }
+        else
+        {
+            textoGameOver.gameObject.SetActive(true);
+        }
     }
 
     void Andar(bool paraFrente)
@@ -58,7 +74,7 @@ public class Dino : MonoBehaviour
     void Pular()
     {
         animator.SetBool("estaPulando", true);
-        Vector2 forca = new Vector2(0f, 15f);
+        Vector2 forca = new Vector2(0f, 18f);
         rb.AddForce(forca, ForceMode2D.Impulse);
         tempoPulado = tempoPulo;
     }
@@ -88,10 +104,21 @@ public class Dino : MonoBehaviour
             //this.transform.position = posicaoInicial;
             audio.PlayOneShot(audioMorri);
             animator.SetBool("estaMorrendo", true);
+
+            Destroy(collision.gameObject);
+            qtdVidas--;
+            AtualizarHUD();
         }
         if (collision.collider.CompareTag("Chao"))
         {
             animator.SetBool("estaPulando", false);
+        }
+        if (collision.collider.CompareTag("cogumelo_bom"))
+        {
+            Destroy(collision.gameObject);
+            qtdCogubelos++;
+            //qtdCogubelos += 1;
+            AtualizarHUD();
         }
     }
 
@@ -105,6 +132,12 @@ public class Dino : MonoBehaviour
         {
             animator.SetBool("estaAndando", false);
         }
+    }
+
+    void AtualizarHUD()
+    {
+        textoQtdCogubelos.GetComponent<Text>().text = qtdCogubelos.ToString();
+        textoVidas.GetComponent<Text>().text = qtdVidas.ToString();
     }
 }
 

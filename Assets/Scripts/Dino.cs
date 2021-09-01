@@ -20,6 +20,7 @@ public class Dino : MonoBehaviour
     private int qtdVidas;
     public GameObject textoVidas;
     public GameObject textoGameOver;
+    private bool andarFrente, andarTras;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,8 @@ public class Dino : MonoBehaviour
         qtdCogubelos = 0;
         qtdVidas = 3;
         AtualizarHUD();
+        andarFrente = false;
+        andarTras = false;
     }
 
     // Update is called once per frame
@@ -39,8 +42,8 @@ public class Dino : MonoBehaviour
         if (qtdVidas > 0)
         {
             //andar para frente ou para trás
-            if (Input.GetKey(KeyCode.D)) Andar(true);
-            if (Input.GetKey(KeyCode.A)) Andar(false);
+            if (Input.GetKey(KeyCode.D) || andarFrente) Andar(true);
+            if (Input.GetKey(KeyCode.A) || andarTras) Andar(false);
 
             if (Input.GetKey(KeyCode.W) && tempoPulado <= 0) Pular();
             tempoPulado -= Time.deltaTime;
@@ -54,7 +57,7 @@ public class Dino : MonoBehaviour
         }
     }
 
-    void Andar(bool paraFrente)
+    public void Andar(bool paraFrente)
     {
         if(paraFrente)
         {
@@ -71,7 +74,18 @@ public class Dino : MonoBehaviour
             transform.position = posicao;
         }
     }
-    void Pular()
+    public void AndarPressionado(bool paraFrente)
+    {
+        if (paraFrente) andarFrente = true;
+        else andarTras = true;
+    }
+    public void AndarSoltar(bool paraFrente)
+    {
+        if (paraFrente) andarFrente = false;
+        else andarTras = false;
+    }
+
+    public void Pular()
     {
         animator.SetBool("estaPulando", true);
         Vector2 forca = new Vector2(0f, 18f);
@@ -120,11 +134,22 @@ public class Dino : MonoBehaviour
             //qtdCogubelos += 1;
             AtualizarHUD();
         }
+        if (collision.collider.CompareTag("inimigo") && 
+            !animator.GetBool("estaMorrendo"))
+        {
+            audio.PlayOneShot(audioMorri);
+            animator.SetBool("estaMorrendo", true);
+
+            //Destroy(collision.gameObject);
+            qtdVidas--;
+            AtualizarHUD();
+        }
     }
 
     void AtualizarAnimacao()
     {
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) || 
+            andarFrente || andarTras)
         {
             animator.SetBool("estaAndando", true);
         }

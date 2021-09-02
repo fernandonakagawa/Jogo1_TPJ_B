@@ -1205,6 +1205,7 @@ GameObject:
   - component: {fileID: 450109382}
   - component: {fileID: 450109381}
   - component: {fileID: 450109380}
+  - component: {fileID: 450109383}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1226,10 +1227,10 @@ RectTransform:
   m_Father: {fileID: 122926635}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -357.1, y: 62.800003}
-  m_SizeDelta: {x: -734.2, y: 111.9}
+  m_AnchorMin: {x: 0.016147634, y: 0}
+  m_AnchorMax: {x: 0.171, y: 0.2444872}
+  m_AnchoredPosition: {x: -4.5999756, y: 3.2999878}
+  m_SizeDelta: {x: -1.2000122, y: -7.0999985}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &450109380
 MonoBehaviour:
@@ -1310,6 +1311,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450109378}
   m_CullTransparentMesh: 0
+--- !u!114 &450109383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450109378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 954022462}
+          m_MethodName: AndarPressionado
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 954022462}
+          m_MethodName: AndarSoltar
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,6 +2516,7 @@ GameObject:
   - component: {fileID: 997043829}
   - component: {fileID: 997043828}
   - component: {fileID: 997043827}
+  - component: {fileID: 997043830}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -2493,10 +2538,10 @@ RectTransform:
   m_Father: {fileID: 122926635}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -215.47998, y: 62.800003}
-  m_SizeDelta: {x: -735.2, y: 111.9}
+  m_AnchorMin: {x: 0.171, y: 0}
+  m_AnchorMax: {x: 0.33330685, y: 0.2444872}
+  m_AnchoredPosition: {x: 0.020019531, y: 3.2999878}
+  m_SizeDelta: {x: -8.200012, y: -7.0999985}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &997043827
 MonoBehaviour:
@@ -2511,7 +2556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2540,7 +2585,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 997043828}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 954022462}
+        m_MethodName: Andar
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &997043828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2577,6 +2633,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997043825}
   m_CullTransparentMesh: 0
+--- !u!114 &997043830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997043825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 954022462}
+          m_MethodName: AndarPressionado
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 954022462}
+          m_MethodName: AndarSoltar
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1001 &1036340652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3786,10 +3885,10 @@ RectTransform:
   m_Father: {fileID: 122926635}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 380.5, y: 55.95}
-  m_SizeDelta: {x: -705.5, y: 111.9}
+  m_AnchorMin: {x: 0.8428409, y: 0}
+  m_AnchorMax: {x: 1, y: 0.2444872}
+  m_AnchoredPosition: {x: 15, y: -3.5500183}
+  m_SizeDelta: {x: 25.5, y: -7.0999985}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2116210298
 MonoBehaviour:
@@ -3833,7 +3932,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2116210299}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 954022462}
+        m_MethodName: Pular
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2116210299
 MonoBehaviour:
   m_ObjectHideFlags: 0

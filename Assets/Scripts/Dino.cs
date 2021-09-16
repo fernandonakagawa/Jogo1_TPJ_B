@@ -21,6 +21,11 @@ public class Dino : MonoBehaviour
     public GameObject textoVidas;
     public GameObject textoGameOver;
     private bool andarFrente, andarTras;
+
+    //hp
+    public GameObject barraVida;
+    private int qtdHP;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +36,12 @@ public class Dino : MonoBehaviour
         animator = GetComponent<Animator>();
         qtdCogubelos = 0;
         qtdVidas = 3;
-        AtualizarHUD();
+        
         andarFrente = false;
         andarTras = false;
+        qtdHP = 99;
+
+        AtualizarHUD();
     }
 
     // Update is called once per frame
@@ -55,6 +63,21 @@ public class Dino : MonoBehaviour
         {
             textoGameOver.gameObject.SetActive(true);
         }
+    }
+
+    public void AtualizarVida(int adicionarVida)
+    {
+        qtdHP += adicionarVida;
+        if(qtdHP <= 0)
+        {
+            qtdVidas--;
+            qtdHP = 100;
+            audio.PlayOneShot(audioMorri);
+            animator.SetBool("estaMorrendo", true);
+        }
+        if (qtdHP > 100) qtdHP = 100;
+        if (qtdVidas < 0) qtdVidas = 0;
+        AtualizarHUD();
     }
 
     public void Andar(bool paraFrente)
@@ -116,11 +139,14 @@ public class Dino : MonoBehaviour
         if (collision.collider.CompareTag("Perigo"))
         {
             //this.transform.position = posicaoInicial;
-            audio.PlayOneShot(audioMorri);
+            /*audio.PlayOneShot(audioMorri);
             animator.SetBool("estaMorrendo", true);
 
             Destroy(collision.gameObject);
-            qtdVidas--;
+            qtdVidas--;*/
+            audio.PlayOneShot(audioUi);
+            Destroy(collision.gameObject);
+            AtualizarVida(-30);
             AtualizarHUD();
         }
         if (collision.collider.CompareTag("Chao"))
@@ -132,9 +158,10 @@ public class Dino : MonoBehaviour
             Destroy(collision.gameObject);
             qtdCogubelos++;
             //qtdCogubelos += 1;
+            AtualizarVida(5);
             AtualizarHUD();
         }
-        if (collision.collider.CompareTag("inimigo") && 
+        /*if (collision.collider.CompareTag("inimigo") && 
             !animator.GetBool("estaMorrendo"))
         {
             audio.PlayOneShot(audioMorri);
@@ -143,7 +170,7 @@ public class Dino : MonoBehaviour
             //Destroy(collision.gameObject);
             qtdVidas--;
             AtualizarHUD();
-        }
+        }*/
     }
 
     void AtualizarAnimacao()
@@ -163,6 +190,7 @@ public class Dino : MonoBehaviour
     {
         textoQtdCogubelos.GetComponent<Text>().text = qtdCogubelos.ToString();
         textoVidas.GetComponent<Text>().text = qtdVidas.ToString();
+        barraVida.GetComponent<RectTransform>().localScale = new Vector3((float)qtdHP/100,1,1);
     }
 }
 

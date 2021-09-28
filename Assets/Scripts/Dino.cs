@@ -8,13 +8,17 @@ public class Dino : MonoBehaviour
     public float velocidade;
     public float tempoPulo;
     private float tempoPulado;
+
     private Vector3 posicaoInicial;
+
     private AudioSource audio;
     public AudioClip audioUi;
     public AudioClip audioMorri;
+
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private Animator animator;
+
     private int qtdCogubelos;
     public GameObject textoQtdCogubelos;
     private int qtdVidas;
@@ -40,6 +44,13 @@ public class Dino : MonoBehaviour
         andarFrente = false;
         andarTras = false;
         qtdHP = 99;
+
+        //audioUi = Resources.Load("Sons/ui") as AudioClip;
+        textoQtdCogubelos = GameObject.Find("texto_cogubons");
+        textoVidas = GameObject.Find("texto_vidas");
+        textoGameOver = GameObject.Find("texto_game_over");
+        textoGameOver.gameObject.SetActive(false);
+        barraVida = GameObject.Find("barra_vida");
 
         AtualizarHUD();
     }

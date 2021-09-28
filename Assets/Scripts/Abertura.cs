@@ -31,6 +31,6 @@ public class Abertura : MonoBehaviour
 
     public void Jogar()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SelecaoPersonagem");
     }
 }

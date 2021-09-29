@@ -7,7 +7,7 @@ public class SelecaoPersonagem : MonoBehaviour
     private GameObject personagem;
     void Start()
     {
-        PlayerPrefs.SetInt("personagem", 0);
+        
         int codigoPersonagem = PlayerPrefs.GetInt("personagem");
         if(codigoPersonagem == 0)
         {
@@ -28,4 +28,7 @@ public class SelecaoPersonagem : MonoBehaviour
         posicaoPersonagem.z = -10f;
         this.transform.position = posicaoPersonagem;
     }
+
+    //public void 
+
 }
